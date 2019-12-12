@@ -1,8 +1,8 @@
-import logging
+from unit.log import log
 
 
 def check(data, result):
-    logging.info('正在校验接口正确性')
+    log.info('正在校验接口正确性')
     for d in data:
         for r in result:
             if r.get('ID') == d.get('ID'):

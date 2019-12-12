@@ -1,9 +1,9 @@
 import requests
-import logging
+from unit.log import log
 
 
 def req(data):
-    logging.info('正在请求接口')
+    log.info('正在请求接口')
     result = []
     for d in data:
         id = d.get('ID')
@@ -12,11 +12,19 @@ def req(data):
         headers = d.get('请求头')
         data = d.get('请求数据')
         if method == 'GET':
-            r = requests.get(url=url, headers=headers)
-            result.append({'ID': id, '返回报文': r.text})
+            try:
+                r = requests.get(url=url, headers=headers)
+                result.append({'ID': id, '返回报文': r.text})
+            except Exception as e:
+                log.warning(e)
+                result.append({'ID': id, '返回报文': '请求失败'})
         elif method == 'POST':
-            r = requests.post(url=url, data=data, headers=headers)
-            result.append({'ID': id, '返回报文': r.text})
+            try:
+                r = requests.post(url=url, data=data, headers=headers)
+                result.append({'ID': id, '返回报文': r.text})
+            except Exception as e:
+                log.warning(e)
+                result.append({'ID': id, '返回报文': '请求失败'})
         else:
             return 'no request type'
     return result

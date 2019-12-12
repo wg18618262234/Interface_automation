@@ -1,9 +1,9 @@
 import csv
-import logging
+from unit.log import log
 
 
 def opencsv():
-    logging.info('正在读取csv中接口信息')
+    log.info('正在读取csv中接口信息')
     '''
     :return:
     eg:
@@ -21,7 +21,7 @@ def opencsv():
 
 
 def writecsv(data):
-    logging.info('正在将测试结果和返回报文写入csv')
+    log.info('正在将测试结果和返回报文写入csv')
     '''
     eg:
         data = [{'ID': '1', '项目': '', '模块': '', '用例描述': '', '请求url': 'http://localhost:8282/login/123&123', '请求方式': 'GET',
