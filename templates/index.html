@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index</title>
+    <script src="../static/jquery-3.4.1.js">
+    </script>
 </head>
 <body>
-
+<div id="start" onclick="start()"><h1>开始</h1></div>
+<div><a href="/report"><h1>测试报告</h1></a></div>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#start").click(function () {
+            $.get("/start", function () {
+                const starting = $("<p></p>").text("执行完毕...");
+                $('#start').append(starting);
+            });
+        });
+    });
+
+    function start() {
+        const starting = $("<p></p>").text("正在执行...");
+        $('#start').append(starting);
+    }
+</script>
 </html>

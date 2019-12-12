@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>report</title>
+    <title>测试报告</title>
 </head>
 <body>
-
+<div>
+    <div><h1>测试报告</h1></div>
+    <div>
+        <table border="1">
+            <thead>
+            <tr>
+                {% for h in head %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in bodys %}
+                <tr>
+                    {% for i in b %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

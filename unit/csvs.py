@@ -2,7 +2,16 @@ import csv
 from unit.log import log
 
 
-def opencsv():
+def opencsvlist():
+    data = []
+    with open('./Interface_automation.csv') as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            data.append(row)
+    return data
+
+
+def opencsvdict():
     log.info('正在读取csv中接口信息')
     '''
     :return:
