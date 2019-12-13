@@ -2,4 +2,4 @@ ID,项目,模块,用例描述,请求url,请求方式,请求头,请求数据,预�
 1,,,,http://localhost:8082/login/123&123,GET,,,'code':1,{'code':1}\n,成功,
 2,,,,http://localhost:8082/,GET,,,{'hello': 'world'},{'hello': 'world'},成功,
 3,,,,http://localhost:8082/indexx,GET,,,2132112,2132112,成功,
-4,,,,http://localhost:8082/loging,POST,,{'wg':'gg'},{'wg':'gg'},"{'11': '11', 'wg': 'gg'}",成功,
+4,,,,http://localhost:8082/loging,POST,,{'wg':'gg'},{'wg':'gg'},<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 3.2 Final//EN'>\n<title>500 Internal Server Error</title>\n<h1>Internal Server Error</h1>\n<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\n,失败,

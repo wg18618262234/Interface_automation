@@ -27,6 +27,8 @@ def report():
 def start():
     from start import start
     start()
+    from unit.ding import sendmessage, getsign
+    sendmessage('测试完成，测试报告已生成http://127.0.0.1:5000/report', timestamp=getsign().get('timestamp'), sign=getsign().get('sign'))
     return render_template('index.html')
 
 
