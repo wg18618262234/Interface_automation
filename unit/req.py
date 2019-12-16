@@ -2,7 +2,7 @@ import requests
 from unit.log import log
 
 
-def req(data):
+def req(data, head):
     log.info('正在请求接口')
     result = []
     for d in data:
@@ -10,6 +10,11 @@ def req(data):
         url = d.get('请求url')
         method = d.get('请求方式')
         headers = d.get('请求头')
+        if headers == '':
+            headers = head
+        else:
+            headers = eval((headers))
+            headers.update(head)
         data = d.get('请求数据')
         if method == 'GET':
             try:

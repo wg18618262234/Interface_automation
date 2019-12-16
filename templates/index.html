@@ -5,33 +5,90 @@
     <title>Index</title>
     <script src="../static/jquery-3.4.1.js">
     </script>
+`    <script type="text/javascript">
+        $(document).ready(function () {
+            $("subheaders").click(function () {
+                {#var params = {"setheaders", $("#setheaders").val()}#}
+                $.ajax(
+                    {
+                        url: "setheaders",
+                        type: "POST",
+                        data: params,
+                        dataType: JSON,
+                        success: function () {
+                            alert("qqq")
+                        }
+                    }
+                )
+            })
+            $("#start").click(function () {
+                $.get("/start", function () {
+                    const starting = $("<p></p>").text("执行完毕...");
+                    $("#start").append(starting);
+                });
+            });
+        });
+
+        function start() {
+            const starting = $("<p></p>").text("正在执行...");
+            $('#start').append(starting);
+        }
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
+        function set_headers() {
+            $.ajax(
+                {
+                    type: "POST",
+                    dataType: "JSON",
+                    url: "/setheaders",
+                    contentType: "application/json",
+                    data: JSON.stringify(getFormData($("#headers"))),
+                    success: function (result) {
+                        console.log(result)
+                        if (result.resultCode == 200) {
+                            alert("success");
+                        }
+                    },
+                    error: function () {
+                        alert('error')
+                    }
+                }
+            );
+        }
+    </script>
 </head>
 <body style="background: aliceblue">
 <div style="text-align: center;width: 450px;height: 300px;">
-    <div id="start" onclick="start()"><h1>开始</h1></div>
-    <div><a href="/report"><h1>测试报告</h1></a></div>
+    <div><a href="/static/uploads/Interface_automation.csv"><h1>下载模板</h1></a></div>
     <div>
         <form id='upload' action="/upload" enctype='multipart/form-data' method='POST'>
             <input type="file" name="file">
             <input type="submit" value="上传">
         </form>
     </div>
-    <div><a href="/static/uploads/Interface_automation.csv"><h1>下载模板</h1></a></div>
+    <div>
+        {#        <form id="headers" action="/setheaders" method="POST" enctype="application/x-www-form-urlencoded">#}
+        {#            <input id="setheaders" type="text" name="headers">#}
+        {#            <input id="subheaders" type="submit" value="提交headers">#}
+        {#        </form>#}
+        <form id="headers">
+            <div>headers:<input id="setheaders" type="text" name="headers"></div>
+            <div><input id="subheaders" type="button" value="提交" onclick="set_headers()"></div>
+        </form>
+    </div>
+    <div><a href="/report"><h1>测试报告</h1></a></div>
+    <div id="start" onclick="start()"><h1>开始</h1></div>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        $("#start").click(function () {
-            $.get("/start", function () {
-                const starting = $("<p></p>").text("执行完毕...");
-                $('#start').append(starting);
-            });
-        });
-    });
 
-    function start() {
-        const starting = $("<p></p>").text("正在执行...");
-        $('#start').append(starting);
-    }
-</script>
 </html>

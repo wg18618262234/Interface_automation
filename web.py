@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -7,6 +7,8 @@ UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'csv'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+headers = {}
 
 
 @app.route('/')
@@ -28,7 +30,8 @@ def start():
     from start import start
     start()
     from unit.ding import sendmessage, getsign
-    sendmessage('测试完成，测试报告已生成http://127.0.0.1:5000/report', timestamp=getsign().get('timestamp'), sign=getsign().get('sign'))
+    sendmessage('测试完成，测试报告已生成http://127.0.0.1:5000/report', timestamp=getsign().get('timestamp'),
+                sign=getsign().get('sign'))
     return render_template('index.html')
 
 
@@ -53,5 +56,16 @@ def upload_file():
     return '上传失败'
 
 
+@app.route('/setheaders', methods=['GET', 'POST'])
+def get_headers():
+    global headers
+    if request.method == 'POST':
+        json_data = request.get_json()
+        headers.update(json_data)
+        json_data.update({'code': 1})
+        return jsonify(json_data)
+    return headers
+
+
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5001)
