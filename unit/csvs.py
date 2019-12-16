@@ -1,10 +1,11 @@
 import csv
 from unit.log import log
+from config import csv_path
 
 
 def opencsvlist():
     data = []
-    with open('./static/uploads/Interface_automation.csv') as f:
+    with open(csv_path) as f:
         f_csv = csv.reader(f)
         for row in f_csv:
             data.append(row)
@@ -22,7 +23,7 @@ def opencsvdict():
        '请求数据': '', '预期结果': "{'code': 1}", '返回报文': "{'code': 1}", '测试结果': '成功', '测试人员': ''}]
     '''
     data = []
-    with open('./static/uploads/Interface_automation.csv') as f:
+    with open(csv_path) as f:
         f_csv = csv.DictReader(f)
         for row in f_csv:
             data.append(row)
@@ -43,9 +44,14 @@ def writecsv(data):
     for d in data:
         for k, v in d.items():
             d.update({k: v.replace('"', "'").replace('\n', '\\n')})
-    with open('./static/uploads/Interface_automation.csv', 'w') as f:
+    with open(csv_path, 'w') as f:
         headers = ['ID', '项目', '模块', '用例描述', '请求url', '请求方式', '请求头', '请求数据', '预期结果', '返回报文', '测试结果', '测试人员']
         f_csv = csv.DictWriter(f, headers)
         f_csv.writeheader()
         f_csv.writerows(data)
     return True
+
+
+if __name__ == '__main__':
+    print(os.path.dirname(__file__))
+    print(opencsvdict())
