@@ -72,7 +72,7 @@
 {#<div><h1 style="text-align: center;color: #1B9AF7;">接口自动化</h1></div>#}
 <div style="border: solid 2px #1B9AF7;text-align:center">
     <div style="margin: 20px;"><a class="button button-glow button-rounded button-raised button-primary"
-                                  href="/static/uploads/Interface_automation.csv">下载模板</a></div>
+                                  href="/static/uploads/Interface_automation.csv">下载csv</a></div>
     <div style="margin: 20px;">
         <form id='upload' action="/upload" enctype='multipart/form-data' method='POST'>
             <input type="file" name="file">
@@ -90,6 +90,13 @@
         </form>
     </div>
     <div style="margin: 20px;"><a class="button button-glow button-rounded button-raised button-primary" href="/report">测试报告</a>
+    </div>
+    <div style="margin: 20px;">
+        <a class="button button-glow button-rounded button-raised button-primary"
+           href="/static/uploads/Interface_automation_success.csv" style="margin-left: 10px;">下载成功csv</a>
+        <a class="button button-glow button-rounded button-raised button-primary"
+           href="/static/uploads/Interface_automation_error.csv"
+           style="margin-right: 10px;">下载失败csv</a>
     </div>
     <div style="margin: 20px;" id="start" class="button button-glow button-border button-rounded button-primary"
          onclick="start()">GO
