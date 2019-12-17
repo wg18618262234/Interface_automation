@@ -1,9 +1,9 @@
 import csv
 from unit.log import log
-from config import csv_path
+from config import csv_path, csv_error_path, csv_success_path
 
 
-def opencsvlist():
+def open_csv_list():
     data = []
     with open(csv_path) as f:
         f_csv = csv.reader(f)
@@ -12,7 +12,7 @@ def opencsvlist():
     return data
 
 
-def opencsvdict():
+def open_csv_dict():
     log.info('正在读取csv中接口信息')
     '''
     :return:
@@ -30,7 +30,43 @@ def opencsvdict():
     return data
 
 
-def writecsv(data):
+def open_success_csv_dict():
+    data = []
+    with open(csv_success_path) as f:
+        f_csv = csv.DictReader(f)
+        for row in f_csv:
+            data.append(row)
+    return data
+
+
+def open_success_csv_list():
+    data = []
+    with open(csv_success_path) as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            data.append(row)
+    return data
+
+
+def open_error_csv_dict():
+    data = []
+    with open(csv_error_path) as f:
+        f_csv = csv.DictReader(f)
+        for row in f_csv:
+            data.append(row)
+    return data
+
+
+def open_error_csv_list():
+    data = []
+    with open(csv_error_path) as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            data.append(row)
+    return data
+
+
+def write_csv(data):
     log.info('正在将测试结果和返回报文写入csv')
     '''
     eg:
@@ -52,6 +88,29 @@ def writecsv(data):
     return True
 
 
-if __name__ == '__main__':
-    print(os.path.dirname(__file__))
-    print(opencsvdict())
+def write_csv_error():
+    data_error = []
+    data = open_csv_dict()
+    for d in data:
+        if d.get('测试结果') == '失败':
+            data_error.append(d)
+    with open(csv_error_path, 'w') as f:
+        headers = ['ID', '项目', '模块', '用例描述', '请求url', '请求方式', '请求头', '请求数据', '预期结果', '返回报文', '测试结果', '测试人员']
+        f_csv = csv.DictWriter(f, headers)
+        f_csv.writeheader()
+        f_csv.writerows(data_error)
+    return True
+
+
+def write_csv_success():
+    data_success = []
+    data = open_csv_dict()
+    for d in data:
+        if d.get('测试结果') == '成功':
+            data_success.append(d)
+    with open(csv_success_path, 'w') as f:
+        headers = ['ID', '项目', '模块', '用例描述', '请求url', '请求方式', '请求头', '请求数据', '预期结果', '返回报文', '测试结果', '测试人员']
+        f_csv = csv.DictWriter(f, headers)
+        f_csv.writeheader()
+        f_csv.writerows(data_success)
+    return True

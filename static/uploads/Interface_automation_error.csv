@@ -1,0 +1,5 @@
+ID,项目,模块,用例描述,请求url,请求方式,请求头,请求数据,预期结果,返回报文,测试结果,测试人员
+1,,,,http://localhost:8082/login/123&123,GET,,,'code':1,请求失败,失败,
+2,,,,http://localhost:8082/,GET,,,{'hello': 'world'},请求失败,失败,
+3,,,,http://localhost:8082/indexx,GET,,,2132112,请求失败,失败,
+4,,,,http://localhost:8082/loging,POST,,{'wg':'gg'},{'wg':'gg'},请求失败,失败,

@@ -10,11 +10,11 @@ def req(data, head):
         url = d.get('请求url')
         method = d.get('请求方式')
         headers = d.get('请求头')
-        if headers == '':
-            headers = head
-        else:
-            headers = eval((headers))
-            headers.update(head)
+        if headers == '' and head.get('headers'):
+            headers = eval(head.get('headers'))
+        elif headers:
+            headers = eval(headers)
+            headers.update(head.get('headers'))
         data = d.get('请求数据')
         if method == 'GET':
             try:

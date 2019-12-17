@@ -1,0 +1,54 @@
+.h2center {
+    text-align: center;
+    color: #fff;
+    background-color: #343a40;
+    font-size: 2rem;
+}
+
+body{font-size: x-small}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 1rem;
+    font-family: Microsoft YaHei, SimHei, Arial, Helvetica, sans-serif;
+}
+
+table {
+    border-left: 1px solid #ccc;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    border-top: 2px solid #00A9C2;
+}
+
+td, th {
+    border: 1px solid #ccc;
+    border-width: 0 1px 1px 0;
+    margin: 2px 0 2px 0;
+    text-align: left;
+    padding: 0.3vw 0.3vw;
+    text-align: center;
+}
+
+tr {
+    height: auto;
+}
+
+.tr_detail {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+th {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.email_url {
+    word-wrap: break-word;
+}

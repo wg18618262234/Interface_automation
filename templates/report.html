@@ -3,24 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>测试报告</title>
+    <link rel="stylesheet" type="text/css" href="../static/report.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap-grid.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap-reboot.css">
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/bootstrap.bundle.js"></script>
+    <script src="../static/jquery-3.4.1.js"></script>
 </head>
 <body>
 <div>
-    <div><h1>测试报告</h1></div>
+    <div class="h2center">成功接口</div>
     <div>
-        <table border="1">
+        <table style="table-layout:fixed" class="table table-hover table-dark" border="1">
             <thead>
             <tr>
-                {% for h in head %}
-                    <th>{{ h }}</th>
-                {% endfor %}
+                {#                {% for h in head %}#}
+                {#                    <th scope="col">{{ h }}</th>#}
+                {#                {% endfor %}#}
+                <th style="width: 2%">ID</th>
+                <th style="width: 2%">项目</th>
+                <th style="width: 2%">模块</th>
+                <th style="width: 3%">用例描述</th>
+                <th style="width: 20%">请求url</th>
+                <th style="width: 3%">请求方式</th>
+                <th style="width: 3%">请求头</th>
+                <th style="width: 3%">请求数据</th>
+                <th style="width: 3%">预期结果</th>
+                <th style="width: 20%">返回报文</th>
+                <th style="width: 3%">测试结果</th>
+                <th style="width: 3%">测试人员</th>
             </tr>
             </thead>
             <tbody>
-            {% for b in bodys %}
-                <tr>
+            {% for b in data_success %}
+                <tr class="tr_show">
                     {% for i in b %}
-                        <td>{{ i }}</td>
+                        <td scope="row">{{ i }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
@@ -28,5 +47,49 @@
         </table>
     </div>
 </div>
+<div>
+    <div class="h2center">失败接口</div>
+    <div>
+        <table style="table-layout:fixed" class="table table-hover table-dark" border="1">
+            <thead>
+            <tr>
+                {#                {% for h in head %}#}
+                {#                    <th scope="col">{{ h }}</th>#}
+                {#                {% endfor %}#}
+                <th style="width: 2%">ID</th>
+                <th style="width: 2%">项目</th>
+                <th style="width: 2%">模块</th>
+                <th style="width: 3%">用例描述</th>
+                <th style="width: 20%">请求url</th>
+                <th style="width: 3%">请求方式</th>
+                <th style="width: 3%">请求头</th>
+                <th style="width: 3%">请求数据</th>
+                <th style="width: 3%">预期结果</th>
+                <th style="width: 20%">返回报文</th>
+                <th style="width: 3%">测试结果</th>
+                <th style="width: 3%">测试人员</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in data_error %}
+                <tr class="tr_show">
+                    {% for i in b %}
+                        <td scope="row">{{ i }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 </body>
 </html>
+<script>
+    (function () {
+        $($(".tr_show").find("td")).addClass("tr_detail");
+    })();
+    $(".tr_show").click(function () {
+        $($(this).find("td")).toggleClass("tr_detail");
+    });
+</script>

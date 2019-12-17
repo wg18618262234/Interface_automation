@@ -18,17 +18,20 @@ def index():
 
 @app.route('/report')
 def report():
-    from unit.csvs import opencsvlist
-    data = opencsvlist()
+    from unit.csvs import open_csv_list, open_error_csv_list, open_success_csv_list
+    data = open_csv_list()
     head = data.pop(0)
-    bodys = data
-    return render_template('report.html', head=head, bodys=bodys)
+    data_success = open_success_csv_list()
+    data_success.pop(0)
+    data_error = open_error_csv_list()
+    data_error.pop(0)
+    return render_template('report.html', head=head, data_success=data_success, data_error=data_error)
 
 
 @app.route('/start')
 def start():
     from start import start
-    start()
+    start(headers)
     from unit.ding import sendmessage, getsign
     sendmessage('测试完成，测试报告已生成http://127.0.0.1:5000/report', timestamp=getsign().get('timestamp'),
                 sign=getsign().get('sign'))
