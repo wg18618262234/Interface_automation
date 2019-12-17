@@ -24,12 +24,26 @@ def sendmessage(message, **kwargs):
     url = 'https://oapi.dingtalk.com/robot/send?access_token' \
           '=976f344b12655ab5751742a28967f99c1183780eaed3332089c22ae86b7c5959&timestamp={}&sign={}'.format(
         timestamp, sign)
-    data = json.dumps({"msgtype": "text", "text": {"content": message}})
+    # data = json.dumps({"msgtype": "text", "text": {"content": message}})
+    data = json.dumps(
+        {
+            "msgtype": "markdown",
+            "markdown": {
+                "title": "测试报告",
+                "text": message,
+                # "text": "#### 杭州天气 @156xxxx8827\n" +
+                #         "> 9度，西北风1级，空气良89，相对温度73%\n\n" +
+                #         "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" +
+                #         "> ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \n"
+            },
+            "at": {
+                "atMobiles": [
+                ],
+                "isAtAll": True
+            }
+        }
+    )
     headers = {'Content-Type': 'application/json'}
     r = requests.post(url=url, data=data, headers=headers)
     raw = r.text
     return raw
-
-
-if __name__ == '__main__':
-    print(sendmessage('hello', timestamp=getsign().get('timestamp'), sign=getsign().get('sign')))

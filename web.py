@@ -33,8 +33,18 @@ def start():
     from start import start
     start(headers)
     from unit.ding import sendmessage, getsign
-    sendmessage('测试完成，测试报告已生成http://127.0.0.1:5000/report', timestamp=getsign().get('timestamp'),
-                sign=getsign().get('sign'))
+    from unit.csvs import get_count
+    import time
+
+    t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+    mes = "接口自动化测试报告\n" + \
+          ">成功：" + str(get_count().get('success_count')) + "\n" + \
+          ">失败：" + str(get_count().get('error_count')) + "\n\n" + \
+          "测试报告地址：" + "http://localhost:5001\n" + \
+          "![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" + \
+          "###### " + t + " 发布 [测试报告](http://localhost:5001) \n"
+    sendmessage(mes, timestamp=getsign().get('timestamp'), sign=getsign().get('sign'))
     return render_template('index.html')
 
 

@@ -114,3 +114,23 @@ def write_csv_success():
         f_csv.writeheader()
         f_csv.writerows(data_success)
     return True
+
+
+def get_count():
+    count = {
+        'success_count': 0,
+        'error_count': 0
+    }
+    sc = 0
+    ec = 0
+    s_c = open_success_csv_list()
+    for s in s_c:
+        sc += 1
+    e_c = open_error_csv_list()
+    for e in e_c:
+        ec += 1
+    sc = sc - 1
+    ec = ec - 1
+    count.update({'success_count': sc, 'error_count': ec})
+    return count
+
