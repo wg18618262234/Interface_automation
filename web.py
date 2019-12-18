@@ -32,7 +32,7 @@ def report():
 def start():
     from start import start
     start(headers)
-    from unit.ding import sendmessage, getsign
+    from unit.ding import send_message, get_sign
     from unit.csvs import get_count
     import time
 
@@ -44,7 +44,7 @@ def start():
           "测试报告地址：" + "http://0.0.0.0:5001/report\n" + \
           "![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" + \
           "###### " + t + " 发布 [测试报告](http://0.0.0.0:5001/report) \n"
-    sendmessage(mes, timestamp=getsign().get('timestamp'), sign=getsign().get('sign'))
+    send_message(mes, timestamp=get_sign().get('timestamp'), sign=get_sign().get('sign'))
     return render_template('index.html')
 
 
