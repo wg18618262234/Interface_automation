@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
+import logging
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -44,7 +45,8 @@ def start():
           "测试报告地址：" + "http://0.0.0.0:5001/report\n" + \
           "![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" + \
           "###### " + t + " 发布 [测试报告](http://0.0.0.0:5001/report) \n"
-    send_message(mes, timestamp=get_sign().get('timestamp'), sign=get_sign().get('sign'))
+    raw = send_message(mes, timestamp=get_sign().get('timestamp'), sign=get_sign().get('sign'))
+    logging.info('DingTalk:' + raw)
     return render_template('index.html')
 
 
@@ -81,4 +83,4 @@ def get_headers():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5000)
