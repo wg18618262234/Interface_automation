@@ -9,7 +9,7 @@ import requests
 
 def getsign():
     timestamp = round(time.time() * 1000)
-    secret = 'SEC7663fb83e3bbaa067d1b97dee93893d3f3414ff1fb25cb5f5e3012d862bb0e4b'
+    secret = '**'
     secret_enc = bytes(secret, encoding='utf-8')
     string_to_sign = '{}\n{}'.format(timestamp, secret)
     string_to_sign_enc = bytes(string_to_sign, encoding='utf-8')
@@ -22,7 +22,7 @@ def sendmessage(message, **kwargs):
     timestamp = kwargs.get('timestamp')
     sign = kwargs.get('sign')
     url = 'https://oapi.dingtalk.com/robot/send?access_token' \
-          '=976f344b12655ab5751742a28967f99c1183780eaed3332089c22ae86b7c5959&timestamp={}&sign={}'.format(
+          '=**&timestamp={}&sign={}'.format(
         timestamp, sign)
     # data = json.dumps({"msgtype": "text", "text": {"content": message}})
     data = json.dumps(
